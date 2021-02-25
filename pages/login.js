@@ -23,7 +23,7 @@ export default (_props) => {
             await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, pass);
-            // window.location.href = '/';
+            window.location.href = '/';
             }}
         >
             Create account
@@ -41,7 +41,7 @@ export default (_props) => {
                 var errorMessage = error.message;
                 // ..
               });
-            // window.location.href = '/';
+            window.location.href = '/';
             }}
         >
             Log in

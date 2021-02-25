@@ -3,7 +3,7 @@ import nookies from 'nookies';
 
 import { firebaseAdmin } from '../config/fire-admin';
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async () => {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
@@ -15,7 +15,7 @@ export const getServerSideProps = async (ctx) => {
     // FETCH STUFF HERE!! 🚀
 
     return {
-      props: { message: `Your email is ${email} and your UID is ${uid}.`, connected:"connecté" },
+      props: { message: `Your email is ${email} and your UID is ${uid}.` },
     };
   } catch (err) {
     // either the `token` cookie didn't exist
@@ -28,15 +28,14 @@ export const getServerSideProps = async (ctx) => {
     // with InferGetServerSidePropsType.
     // The props returned here don't matter because we've
     // already redirected the user.
-    return { props, connected:"déconnecté" };
+    return { props, connectded:"non" };
   }
 };
 
-export default (
-  props
-) => (
-  <div>
-    <p>{props.message}</p>
-    <p>{props.connected}</p>
-  </div>
-);
+// export default (
+//   props
+// ) => (
+//   <div>
+//     <p>{props.message}</p>
+//   </div>
+// );

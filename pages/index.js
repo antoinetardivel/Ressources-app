@@ -1,13 +1,32 @@
 import { useState, useEffect } from "react";
 import firebase from "../config/fire-config";
 import Head from "next/head";
-import CreatePost from "../components/CreateRessource";
 import Link from "next/link";
-import { useAuth } from '../auth/AuthProvider';
+import React from 'react';
 
-const Home = () => {
+// Check if connected
+import nookies from 'nookies';
+import { firebaseAdmin } from '../config/fire-admin';
+
+export const getServerSideProps = async (ctx) => {
+  try {
+    const cookies = nookies.get(ctx);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid, email } = token;
+    return {
+      props: { message: `Your email is ${email} and your UID is ${uid}.`, connected:"connecté" },
+    };
+  } catch (err) {
+    // ctx.res.writeHead(302, { Location: '/login' });
+    // ctx.res.end();
+    return {
+      props: { message: `...`, connected:"déconnecté" },
+    };
+  }
+};
+
+export default (props) => {
   const [ressources, setRessources] = useState([]);
-  const { user } = useAuth();
 
   useEffect(() => {
     firebase.firestore()
@@ -20,12 +39,9 @@ const Home = () => {
         setRessources(ressources);
       });
   }, []);
-
-  console.log(ressources);
-
   return (
     <div>
-      <p>{`User ID: ${user ? user.uid : 'no user signed in'}`}</p>
+      <p>{props.connected}</p>
       <Head>
         <title>Ressources Antoine Tardivel</title>
       </Head>
@@ -39,5 +55,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home;
