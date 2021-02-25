@@ -25,8 +25,14 @@ export const getServerSideProps = async (ctx) => {
   }
 };
 
+
 export default (props) => {
   const [ressources, setRessources] = useState([]);
+  const disconnect = () => {
+    nookies.destroy(null, "token");
+    nookies.set(null, "token", "", {});
+    window.location.href = '/';
+  }
 
   useEffect(() => {
     firebase.firestore()
@@ -42,6 +48,7 @@ export default (props) => {
   return (
     <div>
       <p>{props.connected}</p>
+      <p onClick={disconnect}>Se deconnecter</p>
       <Head>
         <title>Ressources Antoine Tardivel</title>
       </Head>
@@ -52,6 +59,8 @@ export default (props) => {
         )}
       </ul>
       <Link href="/admin"><a>Admin panel</a></Link>
+      <br />
+      <Link href="/login"><a>Login</a></Link>
     </div>
   )
 }

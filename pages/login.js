@@ -23,7 +23,7 @@ export default (_props) => {
             await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, pass);
-            window.location.href = '/';
+                window.location.href = '/';
             }}
         >
             Create account

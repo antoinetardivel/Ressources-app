@@ -11,7 +11,6 @@ const AuthContext = createContext(
 export function AuthProvider({ children }) {
   
   const [user, setUser] = useState({});
-  const [userUid, setUserUid] = useState({});
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,39 +23,7 @@ export function AuthProvider({ children }) {
         nookies.set(undefined, 'token', token, { path: '/' });
       }
     });
-    // return firebase.auth().onIdTokenChanged(async (user) => {
-      // console.log(`token changed!`);
-      // if (!user) {
-      //   console.log(`no token found...`);
-      //   // setUser(null);
-      //   nookies.destroy(null, "token");
-      //   nookies.set(null, "token", "", {maxAge: 60 * 60});
-      //   return;
-      // }
-
-      // console.log(`updating token...`);
-      // const token = await user.getIdToken();
-      // setUser(user);
-      // nookies.destroy(null, "token");
-      // nookies.set(null, "token", token, {maxAge: 60 * 60});
-      // // nookies.set(null, "token", token, {maxAge: 30 * 24 * 60 * 60});
-
-      //////////////////////////////////////////
-      // if (user) {
-      //   const token = await user.getIdToken();
-      //   setUser(user);
-      //   nookies.destroy(null, "token");
-      //   nookies.set(null, "token", token, {maxAge: 60 * 60});
-      // } else {
-      //   setUser(null);
-      //   nookies.destroy(null, "token");
-      //   nookies.set(null, "token", "", {maxAge: 60 * 60});
-      // }
-      ///////////////////////////////////////////
-      
-    // });
   }, []);
-
   // force refresh the token every 10 minutes
   useEffect(() => {
     const handle = setInterval(async () => {
