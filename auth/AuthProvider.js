@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
         console.log(`no token found...`);
         setUser(null);
         nookies.destroy(null, "token");
-        nookies.set(null, "token", "", {});
+        nookies.set(null, "token", "", {maxAge: 60 * 60});
         return;
       }
 
@@ -32,8 +32,8 @@ export function AuthProvider({ children }) {
       const token = await user.getIdToken();
       setUser(user);
       nookies.destroy(null, "token");
-      nookies.set(null, "token", token, {});
-      // nookies.set(null, "token", token, {maxAge: 30 * 24 * 60 * 60,});
+      nookies.set(null, "token", token, {maxAge: 60 * 60});
+      // nookies.set(null, "token", token, {maxAge: 30 * 24 * 60 * 60});
     });
   }, []);
 
