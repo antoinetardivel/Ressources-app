@@ -31,7 +31,8 @@ export default (props) => {
   const disconnect = () => {
     nookies.destroy(null, "token");
     nookies.set(null, "token", "", {});
-    window.location.href = '/';
+    // window.location.href = '/';
+    window.location.reload();
   }
 
   useEffect(() => {
