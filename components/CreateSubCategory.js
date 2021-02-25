@@ -1,6 +1,6 @@
 // form to write posts
 import React, { useState } from "react";
-import fire from "../config/fire-config";
+import firebase from "../config/fire-config";
 
 
 const CreateSubCategory = () => {
@@ -10,7 +10,7 @@ const CreateSubCategory = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    fire.firestore()
+    firebase.firestore()
     .collection("subCategories")
     .add({ title: title});
 

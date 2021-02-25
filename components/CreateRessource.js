@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import fire from "../config/fire-config";
+import firebase from "../config/fire-config";
 
 
 const CreateRessource = () => {
@@ -10,7 +10,7 @@ const CreateRessource = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    fire.firestore()
+    firebase.firestore()
     .collection("ressources")
     .add({ title: title, content: content});
 

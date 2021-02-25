@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import firebase from "firebase"
+import 'firebase/auth'
 
 const firebaseConfig = {
   // apiKey: "AIzaSyDcgdyoDKtXMhhip-SkHxRAY-1H02i1joQ",
@@ -24,5 +25,7 @@ try {
   }
 }
 
+firebase.auth().setPersistence(firebase.auth.Auth?.Persistence?.NONE);
+
 const fire = firebase;
-export default fire;
+export default firebase
